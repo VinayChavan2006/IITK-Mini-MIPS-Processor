@@ -23,7 +23,7 @@
 // Testbench
 `timescale 1ns / 1ps
 
-module processor_tb;
+module tb_processor();
     reg clk, rst;
     processor uut (
         .clk(clk),
@@ -34,18 +34,26 @@ module processor_tb;
         forever #10 clk = ~clk;
     end
     initial begin
+        uut.data_mem_inst.data_mem[32'h0] = 32'd6;
+        uut.data_mem_inst.data_mem[32'h1] = 32'd3;
+        uut.data_mem_inst.data_mem[32'h2] = 32'd8;
+        uut.data_mem_inst.data_mem[32'h3] = 32'd1;
+        uut.data_mem_inst.data_mem[32'h4] = 32'd9;
+        uut.data_mem_inst.data_mem[32'h5] = 32'd2;
+    end
+    initial begin
         rst = 1;
         #15 rst = 0;
-        $monitor("Time=%0t s0 = %h, s1 = %d, s2=%d s3=%d t0=%d t1=%h t2=%d ",$time,uut.reg_file_inst.registers[1],uut.reg_file_inst.registers[2],uut.reg_file_inst.registers[3],uut.reg_file_inst.registers[4],  uut.reg_file_inst.registers[9],uut.reg_file_inst.registers[10], uut.reg_file_inst.registers[11]);
+        $monitor("Time=%0t PC=%h t0 = %h, t1 = %d, t2=%d t3=%d t4=%d t5=%h t6=%d t7=%h t8=%h",$time,uut.pc,uut.reg_file_inst.registers[9],uut.reg_file_inst.registers[10],uut.reg_file_inst.registers[11],uut.reg_file_inst.registers[12],  uut.reg_file_inst.registers[13],uut.reg_file_inst.registers[14], uut.reg_file_inst.registers[15],uut.reg_file_inst.registers[16],uut.reg_file_inst.registers[17]);
         $monitor("Time=%0t PC=%h Instr=%h RegWrite=%b WriteReg=%h WriteData=%h ALUOut=%h MemReadData=%h ",
                  $time, uut.pc, uut.instr, uut.RegWrite, uut.write_reg, uut.write_data, uut.alu_out, uut.mem_read_data);
-        $monitor("Time=%0t data_mem[0x1000]=%d data_mem[0x1004]=%d data_mem[0x1008]=%d data_mem[0x100C]=%d data_mem[0x1010]=%d data_mem[0x1014]=%d",$time,uut.data_mem_inst.data_mem[32'h1000 >> 2],
-                 uut.data_mem_inst.data_mem[32'h1004 >> 2],
-                 uut.data_mem_inst.data_mem[32'h1008 >> 2],
-                 uut.data_mem_inst.data_mem[32'h100C >> 2],
-                 uut.data_mem_inst.data_mem[32'h1010 >> 2],
-                 uut.data_mem_inst.data_mem[32'h1014 >> 2]);
+        $monitor("Time=%0t PC=%h data_mem[0]=%d data_mem[1]=%d data_mem[2]=%d data_mem[3]=%d data_mem[4]=%d data_mem[5]=%d mem_write=%d",$time,uut.pc,uut.data_mem_inst.data_mem[32'h0],
+                 uut.data_mem_inst.data_mem[32'h1],
+                 uut.data_mem_inst.data_mem[32'h2],
+                 uut.data_mem_inst.data_mem[32'h3],
+                 uut.data_mem_inst.data_mem[32'h4],
+                 uut.data_mem_inst.data_mem[32'h5],
+                 uut.MemWrite);
         #5000 $finish;
     end
 endmodule
-
