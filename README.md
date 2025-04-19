@@ -52,9 +52,9 @@ This document outlines the ISA supported by the Mini MIPS processor for CS220 As
 
 | Instruction | Type | Opcode | Funct | Description |
 |------------|------|--------|-------|-------------|
-| lw         | I    | 100011 | -     | rt = Mem[rs + immediate] |
-| sw         | I    | 101011 | -     | Mem[rs + immediate] = rt |
-| lui        | I    | 001111 | -     | rt = immediate << 16 |
+| lw         | I    | 100110 | -     | rt = Mem[rs + immediate] |
+| sw         | I    | 100111 | -     | Mem[rs + immediate] = rt |
+| lui        | I    | 101000 | -     | rt = immediate << 16 |
 
 ---
 
@@ -88,8 +88,8 @@ This document outlines the ISA supported by the Mini MIPS processor for CS220 As
 | Instruction | Type | Opcode | Funct | Description |
 |-------------|------|--------|-------|-------------|
 | slt         | R    | 000000 | 101010 | rd = (rs < rt) ? 1 : 0 |
-| slti        | I    | 001010 | -     | rt = (rs < immediate) ? 1 : 0 |
-| seq         | I    | 001011 | -     | rt = (rs == immediate) ? 1 : 0 |
+| slti        | I    | 110001 | -     | rt = (rs < immediate) ? 1 : 0 |
+| seq         | I    | 110010 | -     | rt = (rs == immediate) ? 1 : 0 |
 
 ---
 
@@ -172,9 +172,9 @@ This document outlines the ISA supported by the Mini MIPS processor for CS220 As
 
 | ALUOp Code | Operation | Used For                              |
 |------------|-----------|----------------------------------------|
-| 0          | DEFAULT(NOP)   | Default value (no operation)          |
-| 1          | ADD       | lw, sw, addi, addiu                   |
-| 2          | SUB       | beq, bne                              |
+| 0          | RTYPE     | R-type instructions (opcode = 0)         |
+| 1          | AND       | and                   |
+| 2          | ADDI      | addi                              |
 | 3          | SLT       | slti, bgt, ble, bgte, bleq            |
 | 4          | SLTU      | sltu, bgtu, bleu                      |
 | 6          | AND       | andi                                  |
