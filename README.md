@@ -11,6 +11,7 @@ This document outlines the ISA supported by the Mini MIPS processor for CS220 As
 | R-type | opcode(6) \| rs(5) \| rt(5) \| rd(5) \| shamt(5) \| funct(6) |
 | I-type | opcode(6) \| rs(5) \| rt(5) \| immediate(16) |
 | J-type | opcode(6) \| address(26) |
+| F-type | opcode(6) \| ftype(5) \| fs(5) \| ft(5) \| fd(5) \| funct(6) |
 
 ---
 
@@ -41,10 +42,10 @@ This document outlines the ISA supported by the Mini MIPS processor for CS220 As
 
 | Instruction | Type | Opcode | Funct | Description |
 |------------|------|--------|-------|-------------|
-| sll        | R    | 000000 | 000000 | rd = rt << shamt |
-| srl        | R    | 000000 | 000010 | rd = rt >> shamt |
-| sla        | R    | 000000 | 000000 | rd = rt <<< shamt (same as sll) |
-| sra        | R    | 000000 | 000011 | rd = rt >>> shamt |
+| sll        | R    | 000000 | 001000 | rd = rt << shamt |
+| srl        | R    | 000000 | 001001 | rd = rt >> shamt |
+| sla        | R    | 000000 | 001010 | rd = rt <<< shamt (same as sll) |
+| sra        | R    | 000000 | 001011 | rd = rt >>> shamt |
 
 ---
 
