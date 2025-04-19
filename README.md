@@ -22,8 +22,8 @@ This document outlines the ISA supported by the Mini MIPS processor for CS220 As
 | sub        | R    | 000000 | 000010 | rd = rs - rt |
 | addu       | R    | 000000 | 100001 | rd = rs + rt (unsigned) |
 | subu       | R    | 000000 | 100011 | rd = rs - rt (unsigned) |
-| addi       | I    | 001000 | -     | rt = rs + immediate |
-| addiu      | I    | 001001 | -     | rt = rs + immediate (unsigned) |
+| addi       | I    | 100001 | -     | rt = rs + immediate |
+| addiu      | I    | 001010 | -     | rt = rs + immediate (unsigned) |
 | madd       | R    | 000000 | 101100 | HI, LO += rs * rt |
 | maddu      | R    | 000000 | 101101 | HI, LO += rs * rt (unsigned) |
 | mul        | R    | 000000 | 011000 | HI, LO = rs * rt |
