@@ -18,8 +18,8 @@ This document outlines the ISA supported by the Mini MIPS processor for CS220 As
 
 | Instruction | Type | Opcode | Funct | Description |
 |------------|------|--------|-------|-------------|
-| add        | R    | 000000 | 100000 | rd = rs + rt |
-| sub        | R    | 000000 | 100010 | rd = rs - rt |
+| add        | R    | 000000 | 000000 | rd = rs + rt |
+| sub        | R    | 000000 | 000010 | rd = rs - rt |
 | addu       | R    | 000000 | 100001 | rd = rs + rt (unsigned) |
 | subu       | R    | 000000 | 100011 | rd = rs - rt (unsigned) |
 | addi       | I    | 001000 | -     | rt = rs + immediate |
@@ -33,7 +33,7 @@ This document outlines the ISA supported by the Mini MIPS processor for CS220 As
 | ori        | I    | 001101 | -     | rt = rs \| immediate |
 | not        | R    | 000000 | 110000 | rd = ~rs |
 | xori       | I    | 001110 | -     | rt = rs ^ immediate |
-| xor        | R    | 000000 | 100110 | rd = rs ^ rt |
+| xor        | R    | 000000 | 000111 | rd = rs ^ rt |
 
 ---
 
@@ -172,9 +172,9 @@ This document outlines the ISA supported by the Mini MIPS processor for CS220 As
 
 | ALUOp Code | Operation | Used For                              |
 |------------|-----------|----------------------------------------|
-| 0          | RTYPE     | R-type instructions (opcode = 0)         |
-| 1          | AND       | and                   |
-| 2          | ADDI      | addi                              |
+| 0          | RTYPE     | R-type instructions (opcode = 0)      |
+| 1          | AND       | and                                   |
+| 2          | ADDI      | addi                                  |
 | 3          | SLT       | slti, bgt, ble, bgte, bleq            |
 | 4          | SLTU      | sltu, bgtu, bleu                      |
 | 6          | AND       | andi                                  |
@@ -191,26 +191,22 @@ This document outlines the ISA supported by the Mini MIPS processor for CS220 As
 
 | ALU_control Code | Mnemonic   | Operation                      | Source (ALUOp / funct) |
 |------------------|------------|-------------------------------|-------------------------|
-| 0                | ALU_AND    | Bitwise AND                   | funct = 36              |
-| 1                | ALU_OR     | Bitwise OR                    | funct = 37              |
-| 2                | ALU_ADD    | Addition                      | funct = 32, ALUOp=1     |
-| 3                | ALU_SLL    | Logical shift left            | funct = 0               |
-| 4                | ALU_SRL    | Logical shift right           | funct = 2               |
-| 5                | ALU_SRA    | Arithmetic shift right        | funct = 3               |
-| 6                | ALU_SUB    | Subtraction                   | funct = 34, ALUOp=2     |
-| 7                | ALU_SLT    | Set on less than              | funct = 42, ALUOp=3      |
-| 8                | ALU_XOR    | Bitwise XOR                   | funct = 38, ALUOp=8     |
-| 9                | ALU_SEQ    | Set if equal                  | ALUOp = 10              |
-| 10               | ALU_J      | Jump                          | ALUOp = 11              |
-| 11               | ALU_JAL    | Jump and link                 | ALUOp = 12              |
-| 12               | ALU_NOT    | Bitwise NOT                   | funct = 48              |
-| 13               | ALU_ADDU   | Unsigned addition             | funct = 33              |
-| 14               | ALU_SUBU   | Unsigned subtraction          | funct = 35              |
-| 15               | ALU_MADDU  | Multiply-Add Unsigned         | funct = 45              |
-| 16               | ALU_MADD   | Multiply-Add Signed           | funct = 44              |
-| 17               | ALU_MUL    | Multiply                      | funct = 28              |
-| 18               | ALU_JR     | Jump Register                 | funct = 8               |
-| 19               | ALU_SLTU   | Set less than unsigned        | ALUOp = 4               |
+| 0                | ALU_ADD    | ADD                           | funct = 0               |
+| 1                | ALU_ADDU   | Unsigned Addition             | funct = 1               |
+| 2                | ALU_SUB    | Subtraction                   | funct = 2, ALUOp=1      |
+| 3                | ALU_SUBU   | Unsigned subtraction          | funct = 3               |
+| 4                | ALU_AND    | Bitwise and                   | funct = 7               |
+| 5                | ALU_OR     | Bit wise or                   | funct = 8               |
+| 6                | ALU_NOT    | Logical not                   | funct = 34, ALUOp=2     |
+| 7                | ALU_XOR    | Bitwise xor                   | funct = 42, ALUOp=3     |
+| 8                | ALU_SLL    | Logical Shift left            | funct = 12, ALUOp=8     |
+| 9                | ALU_SRL    | Logical Shift Right           | ALUOp = 13              |
+| 10               | ALU_SRA    | Shift right arithematic       | ALUOp = 14              |
+| 11               | ALU_SLT    | Set less than                 | ALUOp = 11              |
+| 12               | ALU_SEQ    | Set on equal                  | funct = 48              |
+| 13               | ALU_MUL    | multiplication                | funct = 6               |
+| 14               | ALU_MADD   | Multiply-Add Signed           | funct = 4               |
+| 15               | ALU_MADDU  | Multiply-Add Unsigned         | funct = 5               |
 
 ---
 
